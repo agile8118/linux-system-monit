@@ -26,9 +26,8 @@ float Process::CpuUtilization() const {
   vector<string> cpuData = LinuxParser::CpuUtilization(pid_);
   long total_time = std::stol(cpuData[13]) + std::stol(cpuData[14]) +
                     std::stol(cpuData[15]) + std::stol(cpuData[16]);
-  float seconds =
-      LinuxParser::UpTime() - (std::stol(cpuData[21]) / sysconf(_SC_CLK_TCK));
-  return ((total_time / sysconf(_SC_CLK_TCK)) / seconds);
+
+  return ((total_time / sysconf(_SC_CLK_TCK)) / float(UpTime()));
 }
 
 // Return the command that generated this process

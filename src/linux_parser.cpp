@@ -284,5 +284,5 @@ string LinuxParser::User(int pid) {
 // Read and return the uptime of a process
 long LinuxParser::UpTime(int pid) {
   vector<string> stat = CpuUtilization(pid);
-  return (std::stol(stat[21]) / sysconf(_SC_CLK_TCK));
+  return float(UpTime()) - (std::stol(stat[21]) / sysconf(_SC_CLK_TCK));
 }
